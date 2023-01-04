@@ -173,7 +173,6 @@ module.exports = {
         age: {
           in: 'query',
           isObject: true,
-          notEmpty: true,
           optional: true,
         },
         parentId: {

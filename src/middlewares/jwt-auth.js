@@ -2,9 +2,9 @@ const jwt = require('jsonwebtoken');
 const userService = require('../services/user');
 const AppError = require('../utils/app-error');
 
-async function jwtVerification(token) {
+function jwtVerification(token) {
   try {
-    const decoded = await jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     return decoded;
   } catch (error) {
     throw AppError.forbidden('JWT verification failed.');
@@ -22,8 +22,13 @@ module.exports = async (req, res, next) => {
       throw AppError.forbidden();
     }
 
-    const decoded = await jwtVerification(token);
+    const decoded = jwtVerification(token);
     const user = await userService.findOne({ id: decoded.sub });
+
+    if (!user) {
+      throw AppError.forbidden();
+    }
+
     req.user = user;
     next();
   } catch (error) {

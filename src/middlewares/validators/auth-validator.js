@@ -1,5 +1,4 @@
 const { checkSchema } = require('express-validator');
-const AppError = require('../../utils/app-error');
 
 module.exports = {
   loginRules: () => {

@@ -59,6 +59,10 @@ module.exports = {
       },
     });
 
+    if (!order) {
+      throw AppError.notFound();
+    }
+
     if (
       order.state === OrderStateEnum.FINISHED ||
       order.state === OrderStateEnum.REJECTED ||

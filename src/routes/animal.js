@@ -44,6 +44,6 @@ router
 router
   .route('/:id/parent/:parentId')
   .post(jwtAuth, idRules(), addRemoveParentRules(), validate, addParent)
-  .post(jwtAuth, idRules(), addRemoveParentRules(), validate, removeParent);
+  .delete(jwtAuth, idRules(), addRemoveParentRules(), validate, removeParent);
 
 module.exports = router;
